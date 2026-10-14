@@ -1,1 +1,379 @@
 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ee4d2d">
+  <meta name="description" content="Công cụ hỗ trợ quản lý và tạo liên kết Shopee Affiliate.">
+  <title>Shopee Link Hub | Affiliate</title>
+  <style>
+    :root {
+      --orange: #ee4d2d;
+      --dark: #242424;
+      --muted: #777;
+      --bg: #fff7f4;
+      --line: #f0e2dd;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--line);
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .brand span { color: var(--orange); }
+
+    .tag {
+      font-size: 12px;
+      background: #fff0eb;
+      color: var(--orange);
+      padding: 8px 12px;
+      border-radius: 30px;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 45px auto;
+      padding: 0 18px;
+    }
+
+    .hero { text-align: center; margin-bottom: 28px; }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+
+    .hero h1 span { color: var(--orange); }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 auto;
+      max-width: 560px;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 10px 35px #6b29100a;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 115px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 14px;
+      font: inherit;
+      font-size: 15px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px #ee4d2d18;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 9px 0 18px;
+    }
+
+    button, .link-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      border-radius: 10px;
+      padding: 13px 17px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    button:hover, .link-button:hover { opacity: .88; }
+
+    .primary {
+      background: var(--orange);
+      color: white;
+      width: 100%;
+    }
+
+    .secondary {
+      background: white;
+      color: var(--orange);
+      border: 1px solid var(--orange);
+      width: 100%;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    #result {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #fff7f4;
+      border: 1px solid var(--line);
+      line-height: 1.65;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    #result a {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .steps {
+      margin-top: 22px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .steps h2 { font-size: 19px; margin-top: 0; }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      margin: 17px 0;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .number {
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #fff0eb;
+      color: var(--orange);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .notice {
+      background: #fff8e8;
+      border: 1px solid #f4dfaa;
+      border-radius: 10px;
+      padding: 13px;
+      color: #6b5318;
+      font-size: 13px;
+      line-height: 1.65;
+      margin-top: 18px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 25px 16px 35px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 520px) {
+      header { padding: 16px; }
+      .brand { font-size: 17px; }
+      main { margin-top: 30px; }
+      .panel { padding: 18px; }
+      .actions { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Shopee <span>Link Hub</span></div>
+    <div class="tag">AFFILIATE TOOLS</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Quản lý link <span>Shopee Affiliate</span></h1>
+      <p>Dán đường dẫn sản phẩm Shopee để kiểm tra và tiếp tục tạo link tiếp thị liên kết qua công cụ chính thức.</p>
+    </section>
+
+    <section class="panel">
+      <label for="productUrl">Đường dẫn sản phẩm Shopee</label>
+      <textarea id="productUrl"
+        placeholder="Dán link Shopee vào đây..."></textarea>
+      <p class="hint">
+        Hỗ trợ link bắt đầu bằng https://shopee.vn/ hoặc
+        https://vn.shp.ee/. Link rút gọn khác có thể cần mở trực tiếp
+        trên Shopee để kiểm tra.
+      </p>
+
+      <button class="primary" id="checkBtn">
+        Kiểm tra đường dẫn
+      </button>
+
+      <div id="result" role="status" aria-live="polite"></div>
+
+      <div class="actions">
+        <button class="secondary" id="copyBtn">
+          Sao chép link gốc
+        </button>
+        <button class="secondary" id="openBtn">
+          Mở công cụ Affiliate ↗
+        </button>
+      </div>
+
+      <div class="notice">
+        Lưu ý: Website này chưa tự tạo link Affiliate và không xác nhận
+        hoa hồng. Bạn cần tạo link qua tài khoản Shopee Affiliate chính
+        thức. Không nhập mật khẩu Shopee hoặc thông tin ngân hàng vào đây.
+      </div>
+    </section>
+
+    <section class="steps">
+      <h2>Cách tạo link Affiliate chính thức</h2>
+
+      <div class="step">
+        <div class="number">1</div>
+        <div>Mở công cụ Shopee Affiliate và đăng nhập tài khoản của bạn.</div>
+      </div>
+
+      <div class="step">
+        <div class="number">2</div>
+        <div>Vào mục <strong>Ưu đãi → Custom Link</strong> hoặc công cụ tạo link tương ứng được hiển thị trong tài khoản.</div>
+      </div>
+
+      <div class="step">
+        <div class="number">3</div>
+        <div>Dán link sản phẩm gốc, nhấn lấy link và sao chép link Affiliate do Shopee tạo ra.</div>
+      </div>
+
+      <div class="step">
+        <div class="number">4</div>
+        <div>Quay lại website này khi cần kiểm tra hoặc sao chép link gốc khác.</div>
+      </div>
+
+      <p class="hint">
+        Hướng dẫn có thể khác đôi chút tùy giao diện và quyền tài khoản.
+      </p>
+      <a class="link-button primary"
+         href="https://affiliate.shopee.vn/offer/custom_link"
+         target="_blank" rel="noopener noreferrer">
+        Truy cập Shopee Affiliate
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    Shopee Link Hub · Công cụ hỗ trợ độc lập<br>
+    Không phải website chính thức của Shopee.
+  </footer>
+
+  <script>
+    const input = document.getElementById("productUrl");
+    const result = document.getElementById("result");
+    const affiliateUrl =
+      "https://affiliate.shopee.vn/offer/custom_link";
+
+    function getValidShopeeUrl() {
+      const raw = input.value.trim();
+
+      if (!raw) {
+        throw new Error("Bạn hãy dán link Shopee trước.");
+      }
+
+      let url;
+      try {
+        url = new URL(raw);
+      } catch {
+        throw new Error("Đường dẫn chưa đúng định dạng URL.");
+      }
+
+      const host = url.hostname.toLowerCase();
+      const allowed =
+        host === "shopee.vn" ||
+        host.endsWith(".shopee.vn") ||
+        host === "shp.ee" ||
+        host.endsWith(".shp.ee");
+
+      if (url.protocol !== "https:" || !allowed) {
+        throw new Error(
+          "Chỉ chấp nhận link HTTPS thuộc tên miền Shopee Việt Nam."
+        );
+      }
+
+      return url.href;
+    }
+
+    function show(message) {
+      result.style.display = "block";
+      result.textContent = message;
+    }
+
+    document.getElementById("checkBtn").addEventListener("click", () => {
+      try {
+        const url = getValidShopeeUrl();
+        show("Đã kiểm tra định dạng link. Đây vẫn là link gốc, chưa phải link Affiliate. Hãy mở công cụ Shopee để tạo link hợp lệ.");
+      } catch (error) {
+        show(error.message);
+      }
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      try {
+        const url = getValidShopeeUrl();
+        await navigator.clipboard.writeText(url);
+        show("Đã sao chép link gốc. Lưu ý: đây chưa chắc là link Affiliate.");
+      } catch (error) {
+        show(error.message || "Không sao chép được. Hãy kiểm tra quyền clipboard của trình duyệt.");
+      }
+    });
+
+    document.getElementById("openBtn").addEventListener("click", () => {
+      try {
+        getValidShopeeUrl();
+        window.open(affiliateUrl, "_blank", "noopener,noreferrer");
+        show("Đã mở công cụ Shopee Affiliate trong tab mới. Hãy dán link gốc vào công cụ đó để tạo link Affiliate.");
+      } catch (error) {
+        show(error.message);
+      }
+    });
+  </script>
+</body>
+</html>
